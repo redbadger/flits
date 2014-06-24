@@ -1,0 +1,32 @@
+<!-- template.html -->
+<html>
+  <head>
+    <title>Flits</title>
+    <script src="http://fb.me/react-0.10.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.10.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+
+    <script type="text/jsx" src="/components/machine-item.js"></script>
+    <script type="text/jsx" src="/components/machine-list.js"></script>
+    <script type="text/jsx" src="/components/unit-item.js"></script>
+    <script type="text/jsx" src="/components/unit-list.js"></script>
+    <script type="text/jsx" src="/components/systemd-status.js"></script>
+    <script type="text/jsx" src="/components/dashboard.js"></script>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Flits - fleet management.</h1>
+      <div id="app"></div>
+    </div>
+    <script type="text/jsx">
+      /** @jsx React.DOM */
+      React.renderComponent(
+        <Dashboard />,
+        document.getElementById('app')
+      );
+    </script>
+  </body>
+</html>
