@@ -17,7 +17,7 @@ func GetUnits() string {
 }
 
 func Get(resource string) string {
-  endpoint, err := url.Parse(settings.Config().Api.Url + resource)
+  endpoint, err := url.Parse(settings.Config().Fleet.Url + resource)
   utils.Error(err)
 
   resp, err := http.Get(endpoint.String())

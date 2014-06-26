@@ -9,7 +9,7 @@ You will need to create a file in the root of your project named `settings.gcfg`
 
 ```
 ; flits configuration
-[api]
+[fleet]
 url = http://172.17.8.101:4002/v1-alpha/
 
 [github]

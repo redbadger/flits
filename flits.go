@@ -29,13 +29,8 @@ func githubHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-  if (github.Token() == nil) {
-    authUrl := github.AuthenticationUrl()
-    http.Redirect(w, r, authUrl, 301)
-  } else {
-    SetContentType(w, "text/html")
-    http.ServeFile(w, r, "index.html")
-  }
+  SetContentType(w, "text/html")
+  http.ServeFile(w, r, "index.html")
 }
 
 func machinesHandler(w http.ResponseWriter, r *http.Request) {

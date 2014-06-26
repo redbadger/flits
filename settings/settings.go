@@ -8,7 +8,7 @@ import (
 var cfg Configuration
 
 type Configuration struct {
-  Api struct {
+  Fleet struct {
     Url string
   }
   Github struct {
