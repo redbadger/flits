@@ -5,9 +5,9 @@ var Dashboard = React.createClass({
     return (
       <div className="dashboard">
         <h2>Machines</h2>
-        <MachineList source="http://localhost:8080/fleet/api/machines" />
+        <MachineList source="/api/machines" />
         <h2>Units</h2>
-        <UnitList source="http://localhost:8080/fleet/api/units" />
+        <UnitList source="/api/units" />
       </div>
     );
   }

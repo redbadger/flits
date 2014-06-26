@@ -11,12 +11,10 @@ var UnitList = React.createClass({
     $.ajax({
       url: this.props.source,
       success: function(data) {
-        var units = this.getInitialState();
-        parsed = JSON.parse(data);
-        if (parsed.units) {
-          this.setState(parsed);
+        if (data) {
+          this.setState(data);
         } else {
-          this.setState(this.getInitialState()); 
+          this.setState(this.getInitialState());
         }
       }.bind(this)
     });
@@ -28,13 +26,15 @@ var UnitList = React.createClass({
   },
 
   render: function() {
+    var units = this.state.units.map( function(unit) {
+      return <UnitItem unit={ unit } />
+    });
+
     return (
       <div className="unit-list row">
-        {
-          this.state.units.map( function(unit) {
-            return <UnitItem unit={ unit } />
-          })
-        }
+        <ReactCSSTransitionGroup transitionName="unit">
+          { units }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

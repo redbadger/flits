@@ -2,35 +2,61 @@ package main
 
 import (
   "net/http"
-  "io/ioutil"
-  "strings"
+  "fmt"
+  "github.com/redbadger/flits/api"
+  "github.com/redbadger/flits/settings"
+  "github.com/redbadger/flits/auth"
 )
 
-func indexHandler(w http.ResponseWriter, r *http.Request) {
-  http.ServeFile(w, r, "index.html")
+func SetContentType(w http.ResponseWriter, contentType string) {
+  w.Header().Set("Content-Type", contentType)
 }
 
-// Temporary proxy to the current alpha API once you
-// have socket activated fleet to port 4002 on your (Vagrant) CoreOS machine.
-// https://github.com/coreos/fleet/blob/master/Documentation/api-v1-alpha.md
-func apiHandler(w http.ResponseWriter, r *http.Request) {
-  parts := strings.Split(r.URL.Path, "/")
-  resource := parts[3]
+func auth(handler http.HandlerFunc) http.HandlerFunc {
+  return func(w http.ResponseWriter, r *http.Request) {
+    if (github.Token() == nil) {
+      authUrl := github.AuthenticationUrl()
+      http.Redirect(w, r, authUrl, 301)
+    } else {
+      handler(w, r)
+    }
+  }
+}
 
-  resp, fetch_err := http.Get("http://172.17.8.101:4002/v1-alpha/" + resource)
-  if fetch_err != nil {}
+func githubHandler(w http.ResponseWriter, r *http.Request) {
+  github.Authorize(r.URL.Query()["code"][0])
+  http.Redirect(w, r, "/", 301)
+}
 
-  body, err := ioutil.ReadAll(resp.Body)
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+  if (github.Token() == nil) {
+    authUrl := github.AuthenticationUrl()
+    http.Redirect(w, r, authUrl, 301)
+  } else {
+    SetContentType(w, "text/html")
+    http.ServeFile(w, r, "index.html")
+  }
+}
 
-  if err != nil {}
-  w.Write(body)
+func machinesHandler(w http.ResponseWriter, r *http.Request) {
+  SetContentType(w, "application/json")
+  fmt.Fprint(w, api.GetMachines())
+}
+
+func unitsHandler(w http.ResponseWriter, r *http.Request) {
+  SetContentType(w, "application/json")
+  fmt.Fprint(w, api.GetUnits())
 }
 
 func main() {
+  settings.Load()
+
   fs := http.FileServer(http.Dir("components"))
   http.Handle("/components/", http.StripPrefix("/components/", fs))
 
-  http.HandleFunc("/", indexHandler)
-  http.HandleFunc("/fleet/api/", apiHandler)
+  http.HandleFunc("/", auth(indexHandler))
+  http.HandleFunc("/auth/github/callback/", githubHandler)
+  http.HandleFunc("/api/machines/", auth(machinesHandler))
+  http.HandleFunc("/api/units/", auth(unitsHandler))
   http.ListenAndServe(":8080", nil)
 }

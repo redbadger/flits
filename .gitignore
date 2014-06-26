@@ -1,0 +1,4 @@
+bin/
+gopath/
+github_token.json
+settings.gcfg

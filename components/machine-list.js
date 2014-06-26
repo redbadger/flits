@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+
 var MachineList = React.createClass({
   getInitialState: function() {
     return {
@@ -10,8 +12,7 @@ var MachineList = React.createClass({
   loadMachines: function() {
     $.ajax({
       url: this.props.source,
-      success: function(data) {
-        machines = JSON.parse(data);
+      success: function(machines) {
         this.setState(machines);
       }.bind(this)
     });
@@ -23,13 +24,15 @@ var MachineList = React.createClass({
   },
 
   render: function() {
+    var machines = this.state.machines.map( function(machine) {
+      return (<MachineItem machine={ machine } />);
+    });
+
     return (
       <div className="machine-list row">
-        {
-          this.state.machines.map( function(machine) {
-            return <MachineItem machine={ machine } />
-          })
-        }
+        <ReactCSSTransitionGroup transitionName="machine">
+          { machines }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

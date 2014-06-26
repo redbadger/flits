@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>Flits</title>
-    <script src="http://fb.me/react-0.10.0.js"></script>
+    <script src="http://fb.me/react-with-addons-0.10.0.js"></script>
     <script src="http://fb.me/JSXTransformer-0.10.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.js"></script>
 
     <script type="text/jsx" src="/components/machine-item.js"></script>
     <script type="text/jsx" src="/components/machine-list.js"></script>
@@ -13,12 +13,33 @@
     <script type="text/jsx" src="/components/systemd-status.js"></script>
     <script type="text/jsx" src="/components/dashboard.js"></script>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//bootswatch.com/lumen/bootstrap.min.css"/>
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <style>
+      .unit-enter, .machine-enter {
+        opacity: 0.01;
+        transition: opacity .5s ease-in;
+      }
+      .unit-enter.unit-enter-active, .machine-enter.machine-enter-active {
+        opacity: 1;
+      }
+
+      .unit-leave, .machine-leave {
+        opacity: 1;
+        transition: opacity .5s ease-in;
+       }
+       .unit-leave.unit-leave-active, .machine-leave.machine-leave-active {
+         opacity: 0.01;
+       }
+    </style>
   </head>
   <body>
     <div class="container">
-      <h1>Flits - fleet management.</h1>
+      <div class="navbar navbar-default">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">flits</a>
+        </div>
+      </div>
       <div id="app"></div>
     </div>
     <script type="text/jsx">
