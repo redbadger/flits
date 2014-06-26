@@ -28,7 +28,6 @@ func OAuthConfig() *oauth.Config {
   return config
 }
 
-
 func AuthenticationUrl() string {
   return OAuthConfig().AuthCodeURL("")
 }
