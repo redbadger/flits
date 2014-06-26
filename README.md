@@ -23,3 +23,5 @@ tokenCache = github_token.json
 ```
 
 Once you have socket activated your instance of fleet (this example shows it activated on port 4002), you can then point the single page app using the url config option under the api section within the settings file.  The site currently has support for a single access token from github (more features coming on this in regards multiple users and the management of unit file definitions).
+
+You can build the app using `./build`
