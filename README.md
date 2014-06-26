@@ -14,9 +14,9 @@ url = http://172.17.8.101:4002/v1-alpha/
 
 [github]
 clientId = <<APPLICATION CLIENT ID>>
-clientSecret = clientId = <<APPLICATION CLIENT SECRET>>
-redirectUrl = clientId = <<APPLICATION REDIRECT URL>>
-scope = clientId = <<APPLICATION SCOPE>>
+clientSecret = <<APPLICATION CLIENT SECRET>>
+redirectUrl = <<APPLICATION REDIRECT URL>>
+scope = user:email
 authUrl = https://github.com/login/oauth/authorize/
 tokenUrl = https://github.com/login/oauth/access_token/
 tokenCache = github_token.json
