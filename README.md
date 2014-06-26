@@ -3,7 +3,7 @@ flits
 
 Web based control panel for coreos/fleet
 
-Experimental control panel to manage units via fleet on coreos.
+Experimental control panel to manage units via fleet on coreos. (https://github.com/coreos/coreos-vagrant)
 
 You will need to create a file in the root of your project named `settings.gcfg`
 
