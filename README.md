@@ -22,6 +22,8 @@ tokenUrl = https://github.com/login/oauth/access_token/
 tokenCache = github_token.json
 ```
 
-Once you have socket activated your instance of fleet (this example shows it activated on port 4002), you can then point the single page app using the url config option under the api section within the settings file.  The site currently has support for a single access token from github (more features coming on this in regards multiple users and the management of unit file definitions).
+Once you have socket activated your instance of fleet (this example shows it activated on port 4002), you can then point the single page app using the url config option under the api section within the settings file.  The site currently has support for a single access token from github (more features coming on this in regards multiple users and the management of unit file definitions).  
+
+In the mean time you will need to create and setup an application on github filling in the relevant settings or remove the `auth` handler on the routes from `flits.go`.
 
 You can build the app using `./build`
