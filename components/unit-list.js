@@ -11,7 +11,7 @@ var UnitList = React.createClass({
     $.ajax({
       url: this.props.source,
       success: function(data) {
-        if (data) {
+        if (data.units) {
           this.setState(data);
         } else {
           this.setState(this.getInitialState());
